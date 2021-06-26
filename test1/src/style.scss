@@ -3,6 +3,19 @@
 
 $dark-grey: #7a7a7a;
 $light-grey: #e7eaf5;
+
+@mixin table-general {
+    &__item {
+        margin: 0px 0px 20px 0px;
+        padding: 10px;
+        background: $light-grey;
+        ul {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
 @mixin table-row {
     &__item {
         margin: 0px 10px 0px 0px;
@@ -31,6 +44,24 @@ $light-grey: #e7eaf5;
     }
 }
 
+@mixin summary-row {
+    &__item {
+        margin: 0px 10px 0px 0px;
+        &_icon {
+            flex: 0 0 4%;
+        }
+        &_name {
+            flex: 0 0 40%;
+        }
+        &_active {
+            flex: 0 0 15%;
+        }
+        &_archived {
+            flex: 0 0 15%;
+        }
+    }
+}
+
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -51,23 +82,9 @@ body {
     }
 }
 .notes-list {
+    @include table-general();
+}
 
-    &__item {
-        margin: 0px 0px 20px 0px;
-        padding: 10px;
-        background: $light-grey;
-        ul {
-            display: flex;
-            align-items: center;
-        }
-    }
-}
-.header {
-    background: $dark-grey;
-    color: #ffffff;
-    font-weight: bold;
-    @include table-row();
-}
 .actions {
     display: flex;
     justify-content: flex-end;
@@ -80,9 +97,6 @@ body {
     &__item {
         white-space: nowrap;
         text-overflow: ellipsis;
-        &_icon {
-            
-        }
     }
 }
 .note-icon {
@@ -95,9 +109,22 @@ body {
 }
 .summary {
 
-    &__item {}
+    @include table-general();
 }
 .category {
+    @include summary-row();
+}
 
-    &__item {}
+.header, .summary-header {
+    background: $dark-grey;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.header {
+    @include table-row();
+}
+
+.summary-header {
+    @include summary-row();
 }
