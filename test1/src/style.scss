@@ -1,6 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import './null.scss';
 
+$dark-grey: #7a7a7a;
+$light-grey: #e7eaf5;
+@mixin table-row {
+    &__item {
+        margin: 0px 10px 0px 0px;
+        overflow: hidden;
+        &_icon {
+            flex: 0 0 4%;
+        }
+        &_name {
+            flex: 0 0 17%;
+        }
+        &_date {
+            flex: 0 0 17%;
+        }
+        &_category {
+            flex: 0 0 14%;
+        }
+        &_content {
+            flex: 0 0 17%;
+        }
+        &_dates-list {
+            flex: 0 0 17%;
+        }
+        &_actions {
+            flex: 0 0 8%;
+        }
+    }
+}
+
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -12,28 +42,51 @@ body {
 
 .select-form {
     margin: 10px 0px;
+    select {
+        border: 1px solid #000;
+        padding: 5px;
+        background: $dark-grey;
+        color: #ffffff;
+        border-radius: 5px;
+    }
 }
 .notes-list {
 
-		&__item {}
+    &__item {
+        margin: 0px 0px 20px 0px;
+        padding: 10px 20px;
+        background: $light-grey;
+        ul {
+            display: flex;
+            align-items: center;
+        }
+    }
 }
 .header {
-
-		&__item {}
+    background: $dark-grey;
+    color: #ffffff;
+    font-weight: bold;
+    @include table-row();
 }
 .actions {
+    display: flex;
+    justify-content: flex-end;
 }
 .list-action {
+    margin: 0px 0px 0px 5px;
 }
 .note {
-
-		&__item {}
+    @include table-row();
+    &__item {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 }
 .summary {
 
-		&__item {}
+    &__item {}
 }
 .category {
 
-		&__item {}
+    &__item {}
 }
