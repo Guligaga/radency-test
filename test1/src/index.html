@@ -4,9 +4,157 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Test 1 - Radency</title>
 </head>
 <body>
-    <h1>Hello, world!</h1>
+    <main class="container">
+        <form action="" class="select-form">
+            <label for="note-selector">Select notes type:</label>
+            <select name="" id="note-selector">
+                <option value="active">Active</option>
+                <option value="archived">Archived</option>
+            </select>
+        </form>
+        <ul class="notes-list">
+            <li class="notes-list__item header">
+                <ul>
+                    <li class="header__item">Name</li>
+                    <li class="header__item">Created</li>
+                    <li class="header__item">Category</li>
+                    <li class="header__item">Content</li>
+                    <li class="header__item">Dates</li>
+                    <li class="header__item actions">
+                        <div class="list-action">
+                            <img src="./assets/icons/archivate.svg" alt="archivateAll">
+                        </div>
+                        <div class="list-action">
+                            <img src="./assets/icons/delete.svg" alt="deleteAll">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="notes-list__item note">
+                <ul>
+                    <li class="note__item">
+                        <img src="./assets/icons/task.svg" alt="task">
+                    </li>
+                    <li class="note__item">Shopping list</li>
+                    <li class="note__item">April 20, 2021</li>
+                    <li class="note__item">Task</li>
+                    <li class="note__item">Tomatoes, bread</li>
+                    <li class="note__item"></li>
+                    <li class="note__item actions">
+                        <div class="list-action">
+                            <img src="./assets/icons/edit.svg" alt="edit">
+                        </div>
+                        <div class="list-action">
+                            <img src="./assets/icons/archivate.svg" alt="archivate">
+                        </div>
+                        <div class="list-action">
+                            <img src="./assets/icons/delete.svg" alt="delete">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="notes-list__item note">
+                <ul>
+                    <li class="note__item">
+                        <img src="./assets/icons/thought.svg" alt="thought">
+                    </li>
+                    <li class="note__item">The Theory of Evolution</li>
+                    <li class="note__item">April 21, 2021</li>
+                    <li class="note__item">Random Thought</li>
+                    <li class="note__item">For example, humans and the fruit fly, Drosophila melanogaster, share much of their DNA. 75 per cent of genes that cause diseases in humans are also found in the fruit fly.</li>
+                    <li class="note__item"></li>
+                    <li class="note__item actions">
+                        <div class="list-action">
+                            <img src="./assets/icons/edit.svg" alt="edit">
+                        </div>
+                        <div class="list-action">
+                            <img src="./assets/icons/archivate.svg" alt="archivate">
+                        </div>
+                        <div class="list-action">
+                            <img src="./assets/icons/delete.svg" alt="delete">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="notes-list__item note">
+                <ul>
+                    <li class="note__item">
+                        <img src="./assets/icons/idea.svg" alt="idea">
+                    </li>
+                    <li class="note__item">New feature</li>
+                    <li class="note__item">May 05, 2021</li>
+                    <li class="note__item">Idea</li>
+                    <li class="note__item">As a result, the lighter moths became much easier to spot than the darker ones, making them vulnerable to being eaten by birds.</li>
+                    <li class="note__item">3/5/2021, 5/5/2021</li>
+                    <li class="note__item actions">
+                        <div class="list-action">
+                            <img src="./assets/icons/edit.svg" alt="edit">
+                        </div>
+                        <div class="list-action">
+                            <img src="./assets/icons/archivate.svg" alt="archivate">
+                        </div>
+                        <div class="list-action">
+                            <img src="./assets/icons/delete.svg" alt="delete">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="notes-list__item note">
+                <ul>
+                    <li class="note__item">
+                        <img src="./assets/icons/quote.svg" alt="quote">
+                    </li>
+                    <li class="note__item">New feature</li>
+                    <li class="note__item">May 05, 2021</li>
+                    <li class="note__item">Quote</li>
+                    <li class="note__item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, et.</li>
+                    <li class="note__item"></li>
+                    <li class="note__item actions">
+                        <div class="list-action">
+                            <img src="./assets/icons/edit.svg" alt="edit">
+                        </div>
+                        <div class="list-action">
+                            <img src="./assets/icons/archivate.svg" alt="archivate">
+                        </div>
+                        <div class="list-action">
+                            <img src="./assets/icons/delete.svg" alt="delete">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="summary">
+            <li class="summary__item header">
+                <ul>
+                    <li class="header__item">Note Category</li>
+                    <li class="header__item">Active</li>
+                    <li class="header__item">Archived</li>
+                </ul>
+            </li>
+            <li class="summary__item category">
+                <ul>
+                    <li class="category__item">
+                        <img src="./assets/icons/task.svg" alt="task">
+                    </li>
+                    <li class="category__item">Task</li>
+                    <li class="category__item">13</li>
+                    <li class="category__item">4</li>
+                </ul>
+            </li>
+            <li class="summary__item category">
+                <ul>
+                    <li class="category__item">
+                        <img src="./assets/icons/thought.svg" alt="thought">
+                    </li>
+                    <li class="category__item">Random Thought</li>
+                    <li class="category__item">7</li>
+                    <li class="category__item">12</li>
+                </ul>
+            </li>
+        </ul>
+    </main>
 </body>
 </html>

@@ -64,14 +64,14 @@ module.exports = {
             // chunkFilename: '[name].[ext]'
         }),
         // _ Copy files
-        // new CopyWebpackPlugin({
-        //     patterns: [
-        //         {
-        //             from: path.resolve(__dirname, 'src', 'assets', 'favicon.*'),
-        //             to: path.resolve(__dirname, 'dist'),
-        //         },
-        //     ],
-        // }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'src', 'assets'),
+                    to: path.resolve(__dirname, 'dist/assets'),
+                },
+            ],
+        }),
     ],
     // Loaders help webpack to work with other extensions except js/json
     module: {
