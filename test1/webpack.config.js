@@ -9,48 +9,43 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 const prodMode = !devMode;
 
-const relPublicPath = target => (
-    path.relative(
-        path.join(__dirname, 'dist', target), 
-        path.join(__dirname, 'dist')
-    )
-)
+const relPublicPath = target =>
+    path.relative(path.join(__dirname, 'dist', target), path.join(__dirname, 'dist'));
 
-const filename = ext => devMode ? `[name].${ext}` : `[name].[fullhash].${ext}`;
+const filename = ext => (devMode ? `[name].${ext}` : `[name].[fullhash].${ext}`);
 const fileLoader = assetType => ({
-        loader: 'file-loader',
-        options: {
-            name: prodMode ? '[name].[fullhash].[ext]' : '[name].[ext]',
-            outputPath: assetType,
-        },
+    loader: 'file-loader',
+    options: {
+        name: prodMode ? '[name].[fullhash].[ext]' : '[name].[ext]',
+        outputPath: assetType,
+    },
 });
 
-console.log('\x1b[47m_______________________________________________________________________________\x1b[0m');
+console.log('\x1b[47m_____________________________________________________________________\x1b[0m');
 module.exports = {
-    // Context set directory where unput files are
+    // Context set directory where input files are
     context: path.resolve(__dirname, 'src'),
     // Mode influences on minimising files (we can define mode in package.json scripts)
-    mode: devMode? 'development' : 'production',
+    mode: devMode ? 'development' : 'production',
     // In entry we point files that will go to final structure (files that assemble other chunks)
     entry: {
         // We need to add palyfill here for features like async/await
-        main: ['@babel/polyfill' ,'./index.js'],
-        analytics: './analytics.js',
+        index: ['@babel/polyfill', './index.js'],
     },
     // In output we set where will be new structure and how files will be set
     output: {
         filename: path.join('scripts', filename('js')),
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
     },
     // In resolve we point options of resolving files
     resolve: {
-        //Extensoins, that unnecessary to point in imports
+        // Extensoins, that unnecessary to point in imports
         extensions: ['.js', '.json'],
-        //We can now use alias instead of relative path in imports
+        // We can now use alias instead of relative path in imports
         alias: {
             '@fonts': path.resolve(__dirname, 'src', 'assets', 'fonts'),
             '@': path.resolve(__dirname, 'src'),
-        }
+        },
     },
     // It is array of plugins
     plugins: [
@@ -59,7 +54,7 @@ module.exports = {
             template: './index.html',
             minify: {
                 collapseWhitespace: prodMode,
-            }
+            },
         }),
         // Plugin clears dist before every build
         new CleanWebpackPlugin(),
@@ -68,34 +63,35 @@ module.exports = {
             filename: path.join('styles', filename('css')),
             // chunkFilename: '[name].[ext]'
         }),
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: path.resolve(__dirname, 'src', 'assets', 'favicon.png'),
-                    to: path.resolve(__dirname, 'dist')
-                }
-            ]
-        }),
-        // new EvalSourceMapDevToolPlugin({}),
+        // _ Copy files
+        // new CopyWebpackPlugin({
+        //     patterns: [
+        //         {
+        //             from: path.resolve(__dirname, 'src', 'assets', 'favicon.*'),
+        //             to: path.resolve(__dirname, 'dist'),
+        //         },
+        //     ],
+        // }),
     ],
     // Loaders help webpack to work with other extensions except js/json
     module: {
         rules: [
             {
-                test: /\.css$/,
-                // Here we list loaders in reverse order
-                    //css-loader allows apply css import in js
-                    //style-loader inserts styles to resultant file's head>style
-                use: [{
-                    loader: MiniCSSExtractPlugin.loader,
-                    options: {
-                        publicPath: relPublicPath('styles'),
-                    }
-                }, 'css-loader'],
-            }, 
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: MiniCSSExtractPlugin.loader,
+                        options: {
+                            publicPath: relPublicPath('styles'),
+                        },
+                    },
+                    'css-loader',
+                    'sass-loader',
+                ],
+            },
             {
                 test: /\.(png|svg|jpe?g|gif)/,
-                use: fileLoader('images')
+                use: fileLoader('images'),
             },
             {
                 test: /\.(ttf|woff2?|eot)/,
@@ -103,33 +99,33 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: [/node_modules/],
                 use: {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env'],
-                        plugins: ['@babel/plugin-proposal-class-properties']
+                        plugins: ['@babel/plugin-proposal-class-properties'],
                     },
-                    
-                }
-            }
-        ]
+                },
+            },
+        ],
     },
     optimization: {
-        //This one emits repeated chunks to independent file
+        // This one emits repeated chunks to independent file
         splitChunks: {
-          // include all types of chunks
-          chunks: 'all',
+            // include all types of chunks
+            chunks: 'all',
         },
         // In new webpack standart we use next plugin to minimize css files
-        minimizer: [
-            prodMode ? new CssMinimizerPlugin() : `...`,
-        ],
+        minimizer: [prodMode ? new CssMinimizerPlugin() : '...'],
     },
     devtool: devMode && 'source-map',
     devServer: {
-        port: 3001,
+        contentBase: './dist',
+        port: 4200,
         open: true,
-        hot: devMode,
+        hot: true,
+        clientLogLevel: 'silent',
     },
+    target: 'web',
 };
