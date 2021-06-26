@@ -4,3 +4,36 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.select-form {
+    margin: 10px 0px;
+}
+.notes-list {
+
+		&__item {}
+}
+.header {
+
+		&__item {}
+}
+.actions {
+}
+.list-action {
+}
+.note {
+
+		&__item {}
+}
+.summary {
+
+		&__item {}
+}
+.category {
+
+		&__item {}
+}
