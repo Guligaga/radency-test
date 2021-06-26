@@ -128,3 +128,19 @@ body {
 .summary-header {
     @include summary-row();
 }
+
+.note-creation {
+    margin: 0px 0px 60px 0px;
+    display: flex;
+    justify-content: flex-end;
+
+    &__btn {
+        padding: 10px;
+        background: $dark-grey;
+        color: #ffffff;
+        border-radius: 5px;
+
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+}
