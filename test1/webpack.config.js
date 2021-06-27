@@ -121,7 +121,6 @@ module.exports = {
     },
     devtool: devMode && 'source-map',
     devServer: {
-        contentBase: './dist',
         port: 4200,
         open: true,
         hot: true,
