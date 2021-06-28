@@ -1,5 +1,14 @@
 import { notesList, notesTable, popupForm, popup, notesTypeSelector, archivatedList } from './vars';
-import { createNote, updateNote, deleteNote, archivateNote, unarchivateNote } from './note';
+import {
+    createNote,
+    updateNote,
+    deleteNote,
+    archivateNote,
+    unarchivateNote,
+    deleteAllNotes,
+    archivateAllNotes,
+    unarchivateAllNotes,
+} from './note';
 import { toggleModal, setModal } from './modalControl';
 import {
     addNoteRender,
@@ -7,13 +16,14 @@ import {
     deleteNoteRender,
     createNotesHeader,
     createNoteLi,
+    clearTableRender,
 } from './noteRender';
 
 let noteId = 0;
 
 function notesTableRender() {
     const fragment = document.createDocumentFragment();
-    const header = createNotesHeader();
+    const header = createNotesHeader(true);
     fragment.append(header);
     Object.values(notesList).forEach(note => {
         const li = createNoteLi(note, true);
@@ -22,9 +32,10 @@ function notesTableRender() {
     notesTable.innerHTML = '';
     notesTable.append(fragment);
 }
+
 function archivatedTableRender() {
     const fragment = document.createDocumentFragment();
-    const header = createNotesHeader();
+    const header = createNotesHeader(false);
     fragment.append(header);
     Object.values(archivatedList).forEach(note => {
         const li = createNoteLi(note, false);
@@ -88,6 +99,33 @@ notesTable.addEventListener('click', e => {
     noteId = e.target.closest('.note').dataset.id;
     unarchivateNote(noteId);
     deleteNoteRender(noteId);
+});
+
+notesTable.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn || btn.dataset.action !== 'deleteAll') {
+        return;
+    }
+    deleteAllNotes();
+    clearTableRender();
+});
+
+notesTable.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn || btn.dataset.action !== 'archivateAll') {
+        return;
+    }
+    archivateAllNotes();
+    clearTableRender();
+});
+
+notesTable.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn || btn.dataset.action !== 'unarchivateAll') {
+        return;
+    }
+    unarchivateAllNotes();
+    clearTableRender();
 });
 
 notesTypeSelector.addEventListener('change', e => {

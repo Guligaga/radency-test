@@ -1,4 +1,4 @@
-import { notesList, archivatedList } from './vars';
+import { notesList, archivatedList, notesTypeSelector } from './vars';
 
 function setDate() {
     const options = {
@@ -43,4 +43,22 @@ export function archivateNote(id) {
 export function unarchivateNote(id) {
     notesList[id] = archivatedList[id];
     delete archivatedList[id];
+}
+
+export function deleteAllNotes() {
+    const isActive = notesTypeSelector.value === 'active';
+    const list = isActive ? notesList : archivatedList;
+    Object.keys(list).forEach(prop => {
+        delete list[prop];
+    });
+}
+export function archivateAllNotes() {
+    Object.keys(notesList).forEach(key => {
+        archivateNote(key);
+    });
+}
+export function unarchivateAllNotes() {
+    Object.keys(archivatedList).forEach(key => {
+        unarchivateNote(key);
+    });
 }

@@ -9,7 +9,7 @@ function presetDatesList(list) {
     return list.join(', ');
 }
 
-export function createNotesHeader() {
+export function createNotesHeader(isActive) {
     const li = document.createElement('li');
     li.classList.add('notes-list__item', 'header');
     const inner = `
@@ -22,7 +22,9 @@ export function createNotesHeader() {
             <li class="header__item header__item_dates-list">Dates</li>
             <li class="header__item header__item_actions actions">
                 <div class="list-action">
-                    <button type="button" data-action="archivateAll">
+                    <button type="button" data-action="${
+                        isActive ? 'archivateAll' : 'unarchivateAll'
+                    }">
                         <img src="./assets/icons/archivate-white.svg" alt="archivateAll">
                     </button>
                 </div>
@@ -107,4 +109,12 @@ export function updateNoteRender(obj, id) {
 export function deleteNoteRender(id) {
     const noteToDelete = document.querySelector(`.note[data-id="${id}"]`);
     noteToDelete.remove();
+}
+
+export function clearTableRender() {
+    const isActive = notesTypeSelector.value === 'active';
+    const header = createNotesHeader(isActive);
+
+    notesTable.innerHTML = '';
+    notesTable.append(header);
 }
