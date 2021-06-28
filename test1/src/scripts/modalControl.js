@@ -1,12 +1,12 @@
-const popup = document.querySelector('.popup');
 const createBtn = document.querySelector('.note-creation__btn');
+const popup = document.querySelector('.popup');
 
 function lockBody() {
     document.body.classList.toggle('locked');
 }
 
-function toggleModal() {
-    popup.classList.toggle('d-none');
+export function toggleModal(modal) {
+    modal.classList.toggle('d-none');
     lockBody();
 }
 
@@ -29,7 +29,7 @@ function setModal(fields = {}) {
 }
 
 createBtn.addEventListener('click', () => {
-    toggleModal();
+    toggleModal(popup);
     try {
         setModal({
             name: 'Test',
@@ -45,6 +45,6 @@ createBtn.addEventListener('click', () => {
 
 popup.addEventListener('click', e => {
     if (e.target.classList.contains('popup')) {
-        toggleModal();
+        toggleModal(popup);
     }
 });

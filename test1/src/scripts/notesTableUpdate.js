@@ -1,10 +1,17 @@
 import { notesList } from './vars';
 import { upperCaseFirst } from './utils';
+import { create } from './note';
+import { toggleModal } from './modalControl';
 
 const notesTable = document.querySelector('.notes-list');
+const popupForm = document.querySelector('.popup__form');
 
-function setCategoryName(cat) {
+function presetCategoryName(cat) {
     return cat === 'thought' ? 'Random Thought' : upperCaseFirst(cat);
+}
+
+function presetDatesList(list) {
+    return list.join(', ');
 }
 
 function createLi(obj) {
@@ -20,9 +27,9 @@ function createLi(obj) {
             </li>
             <li class="note__item note__item_name">${name}</li>
             <li class="note__item note__item_date">${date}</li>
-            <li class="note__item note__item_category">${setCategoryName(category)}</li>
+            <li class="note__item note__item_category">${presetCategoryName(category)}</li>
             <li class="note__item note__item_content">${content}</li>
-            <li class="note__item note__item_dates-list">${datesList}</li>
+            <li class="note__item note__item_dates-list">${presetDatesList(datesList)}</li>
             <li class="note__item note__item_actions actions">
                 <div class="list-action">
                     <button type="button">
@@ -56,3 +63,18 @@ function startTableRender() {
 }
 
 document.addEventListener('DOMContentLoaded', startTableRender);
+
+function addNoteRender(obj) {
+    const li = createLi(obj);
+    notesTable.append(li);
+}
+
+popupForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = new FormData(popupForm);
+    const formDataObj = Object.fromEntries(formData);
+
+    const noteObj = create(formDataObj);
+    addNoteRender(noteObj);
+    toggleModal(popupForm.closest('div'));
+});
