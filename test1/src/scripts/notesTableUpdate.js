@@ -1,4 +1,4 @@
-import { notesList, notesTable, popupForm, popup, notesTypeSelector, archivatedList } from './vars';
+import { notesList, notesTable, popupForm, popup, notesTypeSelector, archivedList } from './vars';
 import {
     createNote,
     updateNote,
@@ -18,6 +18,8 @@ import {
     createNoteLi,
     clearTableRender,
 } from './noteRender';
+import { incSingleSummary, decSingleSummary, setSummaryTotal } from './summary';
+import { updateSummaryRender } from './summaryRender';
 
 let noteId = 0;
 
@@ -33,11 +35,11 @@ function notesTableRender() {
     notesTable.append(fragment);
 }
 
-function archivatedTableRender() {
+function archivedTableRender() {
     const fragment = document.createDocumentFragment();
     const header = createNotesHeader(false);
     fragment.append(header);
-    Object.values(archivatedList).forEach(note => {
+    Object.values(archivedList).forEach(note => {
         const li = createNoteLi(note, false);
         fragment.append(li);
     });
@@ -77,6 +79,10 @@ notesTable.addEventListener('click', e => {
         return;
     }
     noteId = e.target.closest('.note').dataset.id;
+
+    decSingleSummary(notesList[noteId].category, notesTypeSelector.value);
+    updateSummaryRender();
+
     deleteNote(noteId);
     deleteNoteRender(noteId);
 });
@@ -87,6 +93,11 @@ notesTable.addEventListener('click', e => {
         return;
     }
     noteId = e.target.closest('.note').dataset.id;
+
+    decSingleSummary(notesList[noteId].category, 'active');
+    incSingleSummary(notesList[noteId].category, 'archived');
+    updateSummaryRender();
+
     archivateNote(noteId);
     deleteNoteRender(noteId);
 });
@@ -97,6 +108,13 @@ notesTable.addEventListener('click', e => {
         return;
     }
     noteId = e.target.closest('.note').dataset.id;
+
+    const currentNote = notesList[noteId] || archivedList[noteId];
+
+    decSingleSummary(currentNote.category, 'archived');
+    incSingleSummary(currentNote.category, 'active');
+    updateSummaryRender();
+
     unarchivateNote(noteId);
     deleteNoteRender(noteId);
 });
@@ -108,6 +126,9 @@ notesTable.addEventListener('click', e => {
     }
     deleteAllNotes();
     clearTableRender();
+
+    setSummaryTotal();
+    updateSummaryRender();
 });
 
 notesTable.addEventListener('click', e => {
@@ -117,6 +138,9 @@ notesTable.addEventListener('click', e => {
     }
     archivateAllNotes();
     clearTableRender();
+
+    setSummaryTotal();
+    updateSummaryRender();
 });
 
 notesTable.addEventListener('click', e => {
@@ -126,6 +150,9 @@ notesTable.addEventListener('click', e => {
     }
     unarchivateAllNotes();
     clearTableRender();
+
+    setSummaryTotal();
+    updateSummaryRender();
 });
 
 notesTypeSelector.addEventListener('change', e => {
@@ -133,7 +160,7 @@ notesTypeSelector.addEventListener('change', e => {
     if (type === 'active') {
         notesTableRender();
     } else {
-        archivatedTableRender();
+        archivedTableRender();
     }
 });
 
@@ -142,14 +169,20 @@ popupForm.addEventListener('submit', e => {
     try {
         const formData = new FormData(popupForm);
         const formDataObj = Object.fromEntries(formData);
+        let noteObj = null;
 
         if (popup.dataset.action === 'create') {
-            const noteObj = createNote(formDataObj);
+            noteObj = createNote(formDataObj);
             addNoteRender(noteObj);
         } else {
-            const noteObj = updateNote(formDataObj, noteId);
+            decSingleSummary(notesList[noteId].category, 'active');
+
+            noteObj = updateNote(formDataObj, noteId);
             updateNoteRender(noteObj, noteId);
         }
+
+        incSingleSummary(noteObj.category, 'active');
+        updateSummaryRender();
 
         toggleModal(popup);
     } catch (err) {

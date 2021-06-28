@@ -67,5 +67,5 @@ export const notesList = {
     // },
 };
 
-export const archivatedList = {};
+export const archivedList = {};
 export const summaryList = {};

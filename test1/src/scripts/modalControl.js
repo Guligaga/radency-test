@@ -25,7 +25,6 @@ export function setModal(fields = { name: '', category: 'task', content: '' }) {
             const target = fieldsContentTargets[key];
             field[target] = value;
         });
-    console.log(document.querySelector('#popup-content').value);
 }
 
 createBtn.addEventListener('click', () => {

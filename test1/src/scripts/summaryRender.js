@@ -1,4 +1,6 @@
 import { presetCategoryName } from './utils';
+import { summaryList, summaryTable } from './vars';
+import { clearEmpty } from './summary';
 
 export function createSummaryHeader() {
     const li = document.createElement('li');
@@ -33,4 +35,19 @@ export function createSummaryItem(obj) {
     `;
     li.insertAdjacentHTML('afterbegin', inner);
     return li;
+}
+
+export function updateSummaryRender() {
+    clearEmpty();
+    summaryTable.innerHTML = '';
+
+    const fragment = document.createDocumentFragment();
+    const header = createSummaryHeader();
+    fragment.append(header);
+
+    Object.values(summaryList).forEach(item => {
+        const li = createSummaryItem(item);
+        fragment.append(li);
+    });
+    summaryTable.append(fragment);
 }

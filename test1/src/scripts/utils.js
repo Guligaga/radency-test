@@ -9,3 +9,9 @@ export function presetCategoryName(cat) {
 export function presetDatesList(list) {
     return list.join(', ');
 }
+
+export function clearObject(obj) {
+    Object.keys(obj).forEach(prop => {
+        delete obj[prop];
+    });
+}
