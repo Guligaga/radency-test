@@ -6,8 +6,12 @@ function lockBody() {
 }
 
 export function toggleModal(modal) {
-    modal.classList.toggle('d-none');
-    lockBody();
+    if (modal instanceof Element) {
+        modal.classList.toggle('d-none');
+        lockBody();
+    } else {
+        throw new Error('Modal is not a DOM Element');
+    }
 }
 
 function setModal(fields = {}) {
@@ -29,8 +33,8 @@ function setModal(fields = {}) {
 }
 
 createBtn.addEventListener('click', () => {
-    toggleModal(popup);
     try {
+        toggleModal(popup);
         setModal({
             name: 'Test',
             category: 'task',
@@ -45,6 +49,10 @@ createBtn.addEventListener('click', () => {
 
 popup.addEventListener('click', e => {
     if (e.target.classList.contains('popup')) {
-        toggleModal(popup);
+        try {
+            toggleModal(popup);
+        } catch (err) {
+            console.error(err);
+        }
     }
 });

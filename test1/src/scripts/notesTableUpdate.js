@@ -65,16 +65,23 @@ function startTableRender() {
 document.addEventListener('DOMContentLoaded', startTableRender);
 
 function addNoteRender(obj) {
+    if (typeof obj !== 'object') {
+        throw new Error('Argument type must be an object');
+    }
     const li = createLi(obj);
     notesTable.append(li);
 }
 
 popupForm.addEventListener('submit', e => {
     e.preventDefault();
-    const formData = new FormData(popupForm);
-    const formDataObj = Object.fromEntries(formData);
+    try {
+        const formData = new FormData(popupForm);
+        const formDataObj = Object.fromEntries(formData);
 
-    const noteObj = create(formDataObj);
-    addNoteRender(noteObj);
-    toggleModal(popupForm.closest('div'));
+        const noteObj = create(formDataObj);
+        addNoteRender(noteObj);
+        toggleModal(popupForm.closest('div'));
+    } catch (err) {
+        console.error(err);
+    }
 });
