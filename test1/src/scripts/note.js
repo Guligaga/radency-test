@@ -1,4 +1,4 @@
-import { notesList } from './vars';
+import { notesList, archivatedList } from './vars';
 
 function setDate() {
     const options = {
@@ -32,4 +32,15 @@ export function updateNote(newData, id) {
 
 export function deleteNote(id) {
     delete notesList[id];
+    delete archivatedList[id];
+}
+
+export function archivateNote(id) {
+    archivatedList[id] = notesList[id];
+    delete notesList[id];
+}
+
+export function unarchivateNote(id) {
+    notesList[id] = archivatedList[id];
+    delete archivatedList[id];
 }

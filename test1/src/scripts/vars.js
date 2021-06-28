@@ -1,7 +1,8 @@
 export const notesTable = document.querySelector('.notes-list');
-export const popupForm = document.querySelector('.popup__form');
+export const notesTypeSelector = document.querySelector('#note-selector');
 export const createBtn = document.querySelector('.note-creation__btn');
 export const popup = document.querySelector('.popup');
+export const popupForm = document.querySelector('.popup__form');
 
 export const notesList = {
     1: {
@@ -64,3 +65,5 @@ export const notesList = {
     //     datesList: [],
     // },
 };
+
+export const archivatedList = {};
