@@ -31,11 +31,10 @@ function setModal(fields = {}) {
 createBtn.addEventListener('click', () => {
     toggleModal();
     try {
-        setModal(true);
         setModal({
-            name: 'William Gaddis',
-            category: 'quote',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, et.',
+            name: 'Test',
+            category: 'task',
+            content: 'test 11:36',
             id: 1,
             date: '21 April, 2021',
         });
