@@ -14,7 +14,7 @@ export function toggleModal(modal) {
     }
 }
 
-function setModal(fields = {}) {
+export function setModal(fields = {}) {
     if (typeof fields !== 'object') {
         throw new Error('Argument type must be an object');
     }
@@ -34,14 +34,8 @@ function setModal(fields = {}) {
 
 createBtn.addEventListener('click', () => {
     try {
+        popup.dataset.action = 'create';
         toggleModal(popup);
-        setModal({
-            name: 'Test',
-            category: 'task',
-            content: 'test 11:36',
-            id: 1,
-            date: '21 April, 2021',
-        });
     } catch (err) {
         console.error(err);
     }

@@ -1,3 +1,4 @@
+import { exp } from 'prelude-ls';
 import { notesList } from './vars';
 
 function setDate() {
@@ -19,6 +20,13 @@ export function create(data) {
     const id = +Object.keys(notesList).pop() + 1;
     const date = setDate();
     const datesList = setDatesList(content);
-    notesList[id] = { id, date, datesList, ...data };
+    notesList[id] = { ...data, id, date, datesList };
+    return notesList[id];
+}
+
+export function update(newData, id) {
+    const { content } = newData;
+    const datesList = setDatesList(content);
+    notesList[id] = { ...notesList[id], ...newData, datesList };
     return notesList[id];
 }
