@@ -1,3 +1,8 @@
+export const notesTable = document.querySelector('.notes-list');
+export const popupForm = document.querySelector('.popup__form');
+export const createBtn = document.querySelector('.note-creation__btn');
+export const popup = document.querySelector('.popup');
+
 export const notesList = {
     1: {
         id: 1,
@@ -22,7 +27,7 @@ export const notesList = {
     //     name: 'New feature',
     //     date: 'May 05, 2021',
     //     category: 'idea',
-    //     content: `As a result, the lighter moths became much easier to spot than on 3/5/2021 
+    //     content: `As a result, the lighter moths became much easier to spot than on 3/5/2021
     //     the darker ones, making them vulnerable to being eaten by birds on 5/5/2021.`,
     //     datesList: ['3/5/2021', '5/5/2021'],
     // },

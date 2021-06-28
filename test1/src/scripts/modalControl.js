@@ -1,27 +1,22 @@
-const createBtn = document.querySelector('.note-creation__btn');
-const popup = document.querySelector('.popup');
+import { createBtn, popup } from './vars';
 
 function lockBody() {
     document.body.classList.toggle('locked');
 }
 
-export function toggleModal(modal) {
-    if (modal instanceof Element) {
-        modal.classList.toggle('d-none');
-        lockBody();
-    } else {
-        throw new Error('Modal is not a DOM Element');
-    }
+export function toggleModal() {
+    popup.classList.toggle('d-none');
+    lockBody();
 }
 
-export function setModal(fields = {}) {
+export function setModal(fields = { name: '', category: 'task', content: '' }) {
     if (typeof fields !== 'object') {
         throw new Error('Argument type must be an object');
     }
     const fieldsContentTargets = {
         name: 'value',
         category: 'value',
-        content: 'textContent',
+        content: 'value',
     };
     Object.entries(fields)
         .filter(([key]) => Object.hasOwnProperty.call(fieldsContentTargets, key))
@@ -30,12 +25,14 @@ export function setModal(fields = {}) {
             const target = fieldsContentTargets[key];
             field[target] = value;
         });
+    console.log(document.querySelector('#popup-content').value);
 }
 
 createBtn.addEventListener('click', () => {
     try {
         popup.dataset.action = 'create';
-        toggleModal(popup);
+        toggleModal();
+        setModal();
     } catch (err) {
         console.error(err);
     }
@@ -44,7 +41,7 @@ createBtn.addEventListener('click', () => {
 popup.addEventListener('click', e => {
     if (e.target.classList.contains('popup')) {
         try {
-            toggleModal(popup);
+            toggleModal();
         } catch (err) {
             console.error(err);
         }

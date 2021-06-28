@@ -1,4 +1,3 @@
-import { exp } from 'prelude-ls';
 import { notesList } from './vars';
 
 function setDate() {
