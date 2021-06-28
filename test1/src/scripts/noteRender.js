@@ -1,13 +1,5 @@
-import { upperCaseFirst } from './utils';
+import { presetCategoryName, presetDatesList } from './utils';
 import { notesTable, notesTypeSelector } from './vars';
-
-function presetCategoryName(cat) {
-    return cat === 'thought' ? 'Random Thought' : upperCaseFirst(cat);
-}
-
-function presetDatesList(list) {
-    return list.join(', ');
-}
 
 export function createNotesHeader(isActive) {
     const li = document.createElement('li');
