@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Test 1 - Radency</title>
 </head>
 <body>
-    <h1>Hello, world!</h1>
+    <main class="container">
+        <fieldset class="select-form">
+            <label for="note-selector">Select notes type:</label>
+            <select name="" id="note-selector">
+                <option value="active">Active</option>
+                <option value="archived">Archived</option>
+            </select>
+        </fieldset>
+        <ul class="notes-list"></ul>
+        <fieldset class="note-creation">
+            <button class="note-creation__btn">Create Note</button>
+        </fieldset>
+        <ul class="summary"></ul>
+    </main>
+    <div class="popup d-none">
+        <form action="" class="popup__form">
+            <input class="popup__input" type="text" name="name" id="popup-name" placeholder="Title...">
+            <div class="popup__select">
+                <label for="popup-category">Choose a category</label>
+                <select name="category" id="popup-category">
+                    <option value="task">Task</option>
+                    <option value="thought">Random Thought</option>
+                    <option value="idea">Idea</option>
+                    <option value="quote">Quote</option>
+                </select>
+            </div>
+            <textarea class="popup__textarea" name="content" id="popup-content" placeholder="Write down a note..."></textarea>
+            <button class="popup__btn" type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -1,3 +1,5 @@
 import './style.scss';
 
-console.log('Hello, world!');
+import './scripts/modalControl';
+import './scripts/notesTableUpdate';
+import './scripts/summaryTableUpdate';
