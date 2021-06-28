@@ -1,7 +1,7 @@
 import { notesList, notesTable, popupForm, popup } from './vars';
-import { create, update } from './note';
+import { createNote, updateNote, deleteNote } from './note';
 import { toggleModal, setModal } from './modalControl';
-import { addNoteRender, updateNoteRender, createLi } from './noteRender';
+import { addNoteRender, updateNoteRender, deleteNoteRender, createLi } from './noteRender';
 
 let noteId = 0;
 
@@ -28,6 +28,16 @@ notesTable.addEventListener('click', e => {
     setModal(notesList[noteId]);
 });
 
+notesTable.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn || btn.dataset.action !== 'delete') {
+        return;
+    }
+    noteId = e.target.closest('.note').dataset.id;
+    deleteNote(noteId);
+    deleteNoteRender(noteId);
+});
+
 popupForm.addEventListener('submit', e => {
     e.preventDefault();
     try {
@@ -35,10 +45,10 @@ popupForm.addEventListener('submit', e => {
         const formDataObj = Object.fromEntries(formData);
 
         if (popup.dataset.action === 'create') {
-            const noteObj = create(formDataObj);
+            const noteObj = createNote(formDataObj);
             addNoteRender(noteObj);
         } else {
-            const noteObj = update(formDataObj, noteId);
+            const noteObj = updateNote(formDataObj, noteId);
             updateNoteRender(noteObj, noteId);
         }
 

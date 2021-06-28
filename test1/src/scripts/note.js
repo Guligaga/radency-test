@@ -14,7 +14,7 @@ function setDatesList(str) {
     return str.match(reg) || [];
 }
 
-export function create(data) {
+export function createNote(data) {
     const { content } = data;
     const id = +Object.keys(notesList).pop() + 1;
     const date = setDate();
@@ -23,9 +23,13 @@ export function create(data) {
     return notesList[id];
 }
 
-export function update(newData, id) {
+export function updateNote(newData, id) {
     const { content } = newData;
     const datesList = setDatesList(content);
     notesList[id] = { ...notesList[id], ...newData, datesList };
     return notesList[id];
+}
+
+export function deleteNote(id) {
+    delete notesList[id];
 }

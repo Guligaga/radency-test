@@ -58,11 +58,15 @@ export function addNoteRender(obj) {
 }
 
 export function updateNoteRender(obj, id) {
-    const noteToUpdate = document.querySelector(`.note[data-id="${id}"]`);
-    console.log(noteToUpdate);
     if (typeof obj !== 'object') {
         throw new Error('Argument type must be an object');
     }
+    const noteToUpdate = document.querySelector(`.note[data-id="${id}"]`);
     const li = createLi(obj);
     noteToUpdate.innerHTML = li.innerHTML;
+}
+
+export function deleteNoteRender(id) {
+    const noteToDelete = document.querySelector(`.note[data-id="${id}"]`);
+    noteToDelete.remove();
 }
