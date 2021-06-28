@@ -44,6 +44,7 @@ export function createLi(obj) {
                 </div>
             </li>
         </ul>
+        <p class="note__content">${content}</p>
     `;
     li.insertAdjacentHTML('afterbegin', inner);
     return li;

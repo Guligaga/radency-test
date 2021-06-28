@@ -17,6 +17,18 @@ function startTableRender() {
 document.addEventListener('DOMContentLoaded', startTableRender);
 
 notesTable.addEventListener('click', e => {
+    const opened = document.querySelector('.note__content.active');
+    const note = e.target.closest('.note');
+    if (opened && opened.closest('.note') !== note) {
+        opened.classList.remove('active');
+    }
+    if (note) {
+        const fullContent = note.querySelector('.note__content');
+        fullContent.classList.toggle('active');
+    }
+});
+
+notesTable.addEventListener('click', e => {
     const btn = e.target.closest('button');
     if (!btn || btn.dataset.action !== 'edit') {
         return;
