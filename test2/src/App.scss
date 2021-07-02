@@ -3,3 +3,12 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+body.locked {
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+}

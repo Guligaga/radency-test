@@ -235,9 +235,9 @@ body.locked {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .active {
-    display: block;
+    display: block !important;
 }

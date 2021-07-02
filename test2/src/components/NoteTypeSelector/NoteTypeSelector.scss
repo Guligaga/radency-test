@@ -1,0 +1,13 @@
+@import '../../vars.scss';
+
+.select-form {
+    margin: 10px 0px;
+    select {
+        border: 1px solid #000;
+        padding: 5px;
+        background: $dark-grey;
+        color: #ffffff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
