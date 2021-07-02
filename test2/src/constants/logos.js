@@ -1,7 +1,7 @@
 import editLogo from '../assets/icons/edit.svg';
 import archivateLogo from '../assets/icons/archivate.svg';
 import deleteLogo from '../assets/icons/delete.svg';
-import archivateWhiteLogo from '../assets/icons/delete-white.svg';
+import archivateWhiteLogo from '../assets/icons/archivate-white.svg';
 import deleteWhiteLogo from '../assets/icons/delete-white.svg';
 
 import ideaLogo from '../assets/icons/idea.svg';
@@ -13,8 +13,8 @@ export const actions = {
     edit: editLogo, 
     archivate: archivateLogo, 
     delete: deleteLogo,
-    archivateWhite: archivateWhiteLogo,
-    deleteWhite: deleteWhiteLogo,
+    archivateAll: archivateWhiteLogo,
+    deleteAll: deleteWhiteLogo,
 };
 
 export const categories = { 

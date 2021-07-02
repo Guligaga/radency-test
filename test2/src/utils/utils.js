@@ -7,7 +7,7 @@ export function presetCategoryName(cat) {
 }
 
 export function presetDatesList(list) {
-    return list.join(', ');
+    return Array.isArray(list) ? list.join(', ') : list;
 }
 
 export function clearObject(obj) {

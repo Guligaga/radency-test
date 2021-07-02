@@ -2,7 +2,6 @@ import { actions } from "../../constants/logos";
 
 function NoteActionBtn(props) {
     const { type } = props;
-    console.log(actions[type]);
     return (
     <div className="list-action">
         <button type="button" data-action={type}>

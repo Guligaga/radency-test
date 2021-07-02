@@ -1,5 +1,6 @@
 import './Table.scss';
 import TableRow from '../TableRow/TableRow'
+import TableHeader from '../TableHeader/TableHeader';
 
 const notesList = {
     1: {
@@ -65,15 +66,17 @@ const notesList = {
 
 function Table(props) {
     const {name} = props;
-  return (
-    <ul className={name}>
-        {
-            Object.values(notesList).map((note) => (
-                <TableRow key={note.id} data={note} />
-            ))
-        }
-    </ul>
-  );
+    const actions = ['edit', 'archivate', 'delete'];
+    return (
+        <ul className={name}>
+            <TableHeader />
+            {
+                Object.values(notesList).map((note) => (
+                    <TableRow key={note.id} data={note} type='note' actions={actions}/>
+                ))
+            }
+        </ul>
+    );
 }
 
 export default Table;

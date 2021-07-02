@@ -1,30 +1,48 @@
+import { paramCase } from 'change-case';
+
 import './TableRow.scss';
 import { categories as categoryLogos } from '../../constants/logos';
 import { presetCategoryName, presetDatesList } from "../../utils/utils";
 import NoteActionBtn from '../NoteActionBtn/NoteActionBtn';
+import TableCell from '../TableCell/TableCell'
 
 function TableRow(props) {
-    const { id, name, date, category, content, datesList } = props.data;
-  return (
-    <li className="notes-list__item note">
-        <ul>
-            <li className="note__item  note__item_icon">
+    const { data: entries, type, actions: actionsList } = props;
+
+    const setIcon = category => {
+        const iconRef = categoryLogos[category];
+        if(iconRef) {
+            return (
                 <div className="note-icon">
-                    <img src={categoryLogos[category]} alt={category}></img>
+                    <img src={iconRef} alt={category}></img>
                 </div>
-            </li>
-            <li className="note__item note__item_name">{name}</li>
-            <li className="note__item note__item_date">{date}</li>
-            <li className="note__item note__item_category">{presetCategoryName(category)}</li>
-            <li className="note__item note__item_content">{content}</li>
-            <li className="note__item note__item_dates-list">{presetDatesList(datesList)}</li>
-            <li className="note__item note__item_actions actions">
-                {
-                    ['edit', 'delete', 'archivate'].map((action, i) => (
-                        <NoteActionBtn key={i} type={action}/>
-                    ))
-                }
-            </li>
+            )
+        }
+        return null;
+    }
+
+    const actions = actionsList.map((action, i) => (
+        <NoteActionBtn key={i} type={action}/>
+    ))
+
+    const data = {
+        icon: setIcon(entries.category),
+        ...entries,
+        category: presetCategoryName(entries.category),
+        datesList: presetDatesList(entries.datesList),
+        actions,
+    }
+
+  return (
+    <li className={`table__item ${type}`}>
+        <ul>
+            {Object.entries(data).filter(([,item]) => typeof item !== 'number')
+                .map(([key, item]) => {
+                    const baseClassName = `${type}__item`
+                    const classList = [baseClassName, `${baseClassName}_${paramCase(key)}`];
+                    return <TableCell key={key} classList={classList}>{item}</TableCell>
+                })
+            }
         </ul>
     </li>
   );

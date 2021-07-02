@@ -24,6 +24,8 @@
         }
         &_actions {
             flex: 0 0 8%;
+            display: flex;
+            justify-content: flex-end;
         }
     }
 }

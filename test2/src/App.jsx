@@ -10,7 +10,7 @@ function App() {
       <NoteTypeSelector />
       <Table name='notes-list' />
       <CreateBtn />
-      <Table name='summary' />
+      {/* <Table name='summary' /> */}
       <Popup />
     </main>
     
