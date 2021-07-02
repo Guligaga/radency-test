@@ -1,0 +1,103 @@
+@import '../../vars.scss';
+
+@mixin table-row {
+    &__item {
+        margin: 0px 10px 0px 0px;
+        overflow: hidden;
+        &_icon {
+            flex: 0 0 4%;
+        }
+        &_name {
+            flex: 0 0 17%;
+        }
+        &_date {
+            flex: 0 0 17%;
+        }
+        &_category {
+            flex: 0 0 14%;
+        }
+        &_content {
+            flex: 0 0 17%;
+        }
+        &_dates-list {
+            flex: 0 0 17%;
+        }
+        &_actions {
+            flex: 0 0 8%;
+        }
+    }
+}
+
+@mixin summary-row {
+    &__item {
+        margin: 0px 10px 0px 0px;
+        &_icon {
+            flex: 0 0 4%;
+        }
+        &_name {
+            flex: 0 0 40%;
+        }
+        &_active {
+            flex: 0 0 15%;
+        }
+        &_archived {
+            flex: 0 0 15%;
+        }
+    }
+}
+.actions {
+    display: flex;
+    justify-content: flex-end;
+}
+.list-action {
+    margin: 0px 0px 0px 5px;
+}
+.note {
+    @include table-row();
+    &__item {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    &__content {
+        display: none;
+        margin: 10px 0px 0px 0px;
+        padding: 10px 40px;
+        background: #ffffff;
+        line-height: 22px;
+    }
+    transition: all 0.5s ease;
+    &:hover {
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+}
+.note-icon {
+    width: 37px;
+    height: 37px;
+    background: $dark-grey;
+    display: flex;
+    padding: 7px;
+    border-radius: 50%;
+}
+
+.category {
+    @include summary-row();
+    transition: all 0.5s ease;
+    &:hover {
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.header, .summary-header {
+    border-radius: 5px;
+    background: $dark-grey;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.header {
+    @include table-row();
+}
+
+.summary-header {
+    @include summary-row();
+}
