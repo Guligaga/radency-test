@@ -1,0 +1,21 @@
+@import '../../vars.scss';
+
+@mixin table-general {
+    &__item {
+        margin: 0px 0px 20px 0px;
+        padding: 10px;
+        background: $light-grey;
+        ul {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+.notes-list {
+    @include table-general();
+}
+.summary {
+    margin: 0px 0px 40px 0px;
+    @include table-general();
+}

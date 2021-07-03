@@ -43,10 +43,5 @@ export function setSummaryTotal() {
     Object.keys(summaryList).forEach(key => {
         summaryList[key].category = key;
     });
-    console.group('setSummaryTotal');
-    console.log(notesList);
-    console.log(archivedList);
-    console.log(summaryList);
-    console.groupEnd();
     return summaryList;
 }
