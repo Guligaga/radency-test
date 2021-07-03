@@ -4,7 +4,9 @@ import './TableRow.scss';
 import { categories as categoryLogos } from '../../constants/logos';
 import { presetCategoryName, presetDatesList } from "../../utils/utils";
 import NoteActionBtn from '../NoteActionBtn/NoteActionBtn';
-import TableCell from '../TableCell/TableCell'
+import TableCell from '../TableCell/TableCell';
+
+const FIELDS_ORDER = ['icon', 'name', 'date', 'category', 'content', 'datesList', 'active', 'archived', 'actions'];
 
 function TableRow(props) {
     const { data: entries, type, actions: actionsList, parent } = props;
@@ -31,23 +33,24 @@ function TableRow(props) {
     }
 
     const data = {
-        icon: setIcon(entries.category),
         ...entries,
+        icon: setIcon(entries.category),
         category: presetCategoryName(entries.category),
         datesList: presetDatesList(entries.datesList),
         actions: presetActions(actionsList),
     }
 
+    const fields = FIELDS_ORDER.filter(field => data.hasOwnProperty(field));
+    const baseClassName = `${type}__item`;
+
+
     return (
         <li className={`${parent}__item ${type}`}>
             <ul>
-                {Object.entries(data).filter(([key]) => key !== 'id')
-                    .map(([key, item]) => {
-                        const baseClassName = `${type}__item`
-                        const classList = [baseClassName, `${baseClassName}_${paramCase(key)}`];
-                        return <TableCell key={key} classList={classList}>{item}</TableCell>
-                    })
-                }
+                {fields.map(field => {
+                    const classList = [baseClassName, `${baseClassName}_${paramCase(field)}`];
+                    return <TableCell key={field} classList={classList}>{data[field]}</TableCell>
+                })}
             </ul>
         </li>
     );

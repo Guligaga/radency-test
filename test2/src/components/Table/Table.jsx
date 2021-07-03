@@ -5,9 +5,10 @@ import TableRow from '../TableRow/TableRow'
 import TableHeader from '../TableHeader/TableHeader';
 
 
-function Table(props) {
-    const {name} = props;
+
+function Table({ name }) {
     const { notes, summary } = useSelector(state => state);
+
     const preset = {
         'notes-list': {
             list: notes,
@@ -20,8 +21,11 @@ function Table(props) {
             actions: [],
         }
     }
-    const {list, itemName, actions} = preset[name]
+    
+    
+    const {list, itemName, actions} = preset[name];
 
+    if(!preset[name]) return null;
     return (
         <ul className={name}>
             <TableHeader parent={name} data={Object.values(list)[0]}/>

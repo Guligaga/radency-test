@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from 'redux-thunk';
 
+import generalsReducer from "./generalsReducer";
 import notesReducer from "./notesReducer";
 import summaryReducer from "./summaryReducer";
 
@@ -8,6 +9,7 @@ import summaryReducer from "./summaryReducer";
 const rootReducer = combineReducers({
     notes: notesReducer,
     summary: summaryReducer,
+    generals: generalsReducer,
 })
 
 
