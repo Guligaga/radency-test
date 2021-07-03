@@ -8,7 +8,7 @@ import CreateBtn from './components/CreateBtn/CreateBtn';
 
 
 function App() {
-	const {popupType} = useSelector(state => state.generals);
+	const {popupData} = useSelector(state => state.generals);
 
 	return (
 		<main className="container">
@@ -16,7 +16,7 @@ function App() {
 			<Table name='notes-list' />
 			<CreateBtn />
 			<Table name='summary' />
-			{popupType && <Popup popupType={popupType}/>}
+			{popupData && <Popup cata={popupData}/>}
 		</main>
 	);
 }

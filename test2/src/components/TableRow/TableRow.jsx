@@ -26,7 +26,7 @@ function TableRow(props) {
     const presetActions = list => {
         if(list.length) {
             return list.map((action, i) => (
-                <NoteActionBtn key={i} type={action}/>
+                <NoteActionBtn key={i} type={action} id={entries.id}/>
             ))
         } 
         return null

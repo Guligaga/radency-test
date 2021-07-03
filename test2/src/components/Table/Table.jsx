@@ -13,7 +13,7 @@ function Table({ name }) {
         'notes-list': {
             list: notes,
             itemName: 'note',
-            actions: ['edit', 'archivate', 'delete'],
+            actions: ['update', 'archivate', 'delete'],
         },
         'summary': {
             list: summary,

@@ -1,14 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { togglePopup } from '../../redux/actions/generalsActions';
 import './CreateBtn.scss';
 
 
 function CreateBtn() {
-    // const {popupVisible} = useSelector(state => state.generals);
     const dispatch = useDispatch();
 
     function showPopup() {
-        dispatch(togglePopup('create'))
+        dispatch(togglePopup())
         document.body.classList.toggle('locked');
     }
 
