@@ -7,7 +7,7 @@ import NoteActionBtn from '../NoteActionBtn/NoteActionBtn';
 import TableCell from '../TableCell/TableCell'
 
 function TableRow(props) {
-    const { data: entries, type, actions: actionsList } = props;
+    const { data: entries, type, actions: actionsList, parent } = props;
 
     const setIcon = category => {
         const iconRef = categoryLogos[category];
@@ -21,31 +21,36 @@ function TableRow(props) {
         return null;
     }
 
-    const actions = actionsList.map((action, i) => (
-        <NoteActionBtn key={i} type={action}/>
-    ))
+    const presetActions = list => {
+        if(list.length) {
+            return list.map((action, i) => (
+                <NoteActionBtn key={i} type={action}/>
+            ))
+        } 
+        return null
+    }
 
     const data = {
         icon: setIcon(entries.category),
         ...entries,
         category: presetCategoryName(entries.category),
         datesList: presetDatesList(entries.datesList),
-        actions,
+        actions: presetActions(actionsList),
     }
 
-  return (
-    <li className={`table__item ${type}`}>
-        <ul>
-            {Object.entries(data).filter(([,item]) => typeof item !== 'number')
-                .map(([key, item]) => {
-                    const baseClassName = `${type}__item`
-                    const classList = [baseClassName, `${baseClassName}_${paramCase(key)}`];
-                    return <TableCell key={key} classList={classList}>{item}</TableCell>
-                })
-            }
-        </ul>
-    </li>
-  );
+    return (
+        <li className={`${parent}__item ${type}`}>
+            <ul>
+                {Object.entries(data).filter(([key]) => key !== 'id')
+                    .map(([key, item]) => {
+                        const baseClassName = `${type}__item`
+                        const classList = [baseClassName, `${baseClassName}_${paramCase(key)}`];
+                        return <TableCell key={key} classList={classList}>{item}</TableCell>
+                    })
+                }
+            </ul>
+        </li>
+    );
 }
 
 export default TableRow;

@@ -12,6 +12,10 @@
     }
 }
 
-.table {
+.notes-list {
+    @include table-general();
+}
+.summary {
+    margin: 0px 0px 40px 0px;
     @include table-general();
 }

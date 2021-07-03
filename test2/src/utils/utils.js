@@ -3,6 +3,9 @@ export function upperCaseFirst(str) {
 }
 
 export function presetCategoryName(cat) {
+    if(typeof cat !== 'string') {
+        return null;
+    }
     return cat === 'thought' ? 'Random Thought' : upperCaseFirst(cat);
 }
 
