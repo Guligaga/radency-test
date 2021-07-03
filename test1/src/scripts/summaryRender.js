@@ -38,7 +38,6 @@ export function createSummaryItem(obj) {
 }
 
 export function updateSummaryRender() {
-    console.log(summaryList);
     clearEmpty();
     summaryTable.innerHTML = '';
 
