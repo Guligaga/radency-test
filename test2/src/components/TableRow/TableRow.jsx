@@ -4,10 +4,12 @@ import './TableRow.scss';
 import { categories as categoryLogos } from '../../constants/logos';
 import { presetCategoryName, presetDatesList } from "../../utils/utils";
 import NoteActionBtn from '../NoteActionBtn/NoteActionBtn';
-import TableCell from '../TableCell/TableCell'
+import TableCell from '../TableCell/TableCell';
+
+const FIELDS_ORDER = ['icon', 'name', 'date', 'category', 'content', 'datesList', 'active', 'archived', 'actions'];
 
 function TableRow(props) {
-    const { data: entries, type, actions: actionsList, parent } = props;
+    const { data, type, actions, parent } = props;
 
     const setIcon = category => {
         const iconRef = categoryLogos[category];
@@ -24,30 +26,31 @@ function TableRow(props) {
     const presetActions = list => {
         if(list.length) {
             return list.map((action, i) => (
-                <NoteActionBtn key={i} type={action}/>
+                <NoteActionBtn key={i} type={action} id={data.id}/>
             ))
         } 
         return null
     }
 
-    const data = {
-        icon: setIcon(entries.category),
-        ...entries,
-        category: presetCategoryName(entries.category),
-        datesList: presetDatesList(entries.datesList),
-        actions: presetActions(actionsList),
+    const dataToRender = {
+        ...data,
+        icon: setIcon(data.category),
+        category: presetCategoryName(data.category),
+        datesList: presetDatesList(data.datesList),
+        actions: presetActions(actions),
     }
+
+    const fields = FIELDS_ORDER.filter(field => data.hasOwnProperty(field));
+    const baseClassName = `${type}__item`;
+
 
     return (
         <li className={`${parent}__item ${type}`}>
             <ul>
-                {Object.entries(data).filter(([key]) => key !== 'id')
-                    .map(([key, item]) => {
-                        const baseClassName = `${type}__item`
-                        const classList = [baseClassName, `${baseClassName}_${paramCase(key)}`];
-                        return <TableCell key={key} classList={classList}>{item}</TableCell>
-                    })
-                }
+                {fields.map(field => {
+                    const classList = [baseClassName, `${baseClassName}_${paramCase(field)}`];
+                    return <TableCell key={field} classList={classList}>{dataToRender[field]}</TableCell>
+                })}
             </ul>
         </li>
     );

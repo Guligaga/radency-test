@@ -1,9 +1,19 @@
+import { useDispatch } from 'react-redux';
+import { togglePopup } from '../../redux/actions/generalsActions';
 import './CreateBtn.scss';
 
-function CreateBtn(props) {
+
+function CreateBtn() {
+    const dispatch = useDispatch();
+
+    function showPopup() {
+        dispatch(togglePopup())
+        document.body.classList.toggle('locked');
+    }
+
     return (
         <fieldset className="note-creation">
-            <button className="note-creation__btn">Create Note</button>
+            <button onClick={showPopup} className="note-creation__btn">Create Note</button>
         </fieldset>
     );
 }
