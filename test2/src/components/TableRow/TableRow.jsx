@@ -40,7 +40,9 @@ function TableRow(props) {
         actions: presetActions(actions),
     }
 
-    const fields = FIELDS_ORDER.filter(field => data.hasOwnProperty(field));
+    const fields = FIELDS_ORDER.filter(field => 
+        typeof dataToRender[field] !== 'undefined'
+    );
     const baseClassName = `${type}__item`;
 
 
