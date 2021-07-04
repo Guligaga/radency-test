@@ -2,8 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions as actionLogos } from "../../constants/logos";
 
 import {
-    archivateNote, 
-    unarchivateNote, 
+    toggleNoteArchiving,
     deleteNote
 } from "../../redux/actions/notesActions";
 
@@ -20,9 +19,7 @@ function NoteActionBtn({ type, id }) {
             case 'update':
                 return togglePopup(notes[id]);
             case 'archivate':
-                return archivateNote(notes[id]);
-            case 'unarchivate':
-                return unarchivateNote(notes[id]);
+                return toggleNoteArchiving(notes[id]);
             case 'delete':
                 return deleteNote(notes, id);
             default:

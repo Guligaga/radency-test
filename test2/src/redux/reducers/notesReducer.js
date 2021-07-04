@@ -2,8 +2,7 @@ import {
     CREATE_NOTE, 
     UPDATE_NOTE, 
     DELETE_NOTE, 
-    ARCHIVATE_NOTE, 
-    UNARCHIVATE_NOTE, 
+    TOGGLE_NOTE_ARCHIVING,
 } from "../actions/types";
 
 const initialState = {
@@ -84,9 +83,7 @@ export default function notesReducer(state = initialState, action) {
             return {...state, [payload.id]: payload};
         case DELETE_NOTE: 
             return {...payload};
-        case ARCHIVATE_NOTE: 
-            return {...state, [payload.id]: payload};
-        case UNARCHIVATE_NOTE: 
+        case TOGGLE_NOTE_ARCHIVING: 
             return {...state, [payload.id]: payload};
         default:
             return state;

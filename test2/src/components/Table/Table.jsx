@@ -7,30 +7,33 @@ import TableHeader from '../TableHeader/TableHeader';
 
 
 function Table({ name }) {
-    const { notes, summary } = useSelector(state => state);
+    const { 
+        notes, 
+        summary, 
+        generals: {isArchivedVisible} 
+    } = useSelector(state => state);
 
     const preset = {
         'notes-list': {
-            list: notes,
+            list: Object.entries(notes).filter(([,note]) => note.isArchived === isArchivedVisible),
             itemName: 'note',
             actions: ['update', 'archivate', 'delete'],
         },
         'summary': {
-            list: summary,
+            list: Object.entries(summary),
             itemName: 'category',
             actions: [],
         }
     }
-    
     
     const {list, itemName, actions} = preset[name];
 
     if(!preset[name]) return null;
     return (
         <ul className={name}>
-            <TableHeader parent={name} data={Object.values(list)[0]}/>
+            <TableHeader parent={name} />
             {
-                Object.entries(list).map(([id, item]) => (
+                list.map(([id, item]) => (
                     <TableRow key={id} data={item} type={itemName} parent={name} actions={actions}/>
                 ))
             }

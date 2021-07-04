@@ -9,9 +9,9 @@ import { useState } from 'react';
 function Popup() {
 	const {popupData} = useSelector(state => state.generals);
     const dispatch = useDispatch();
-	const [name, setName] = useState(popupData.name);
-	const [category, setCategory] = useState(popupData.category);
-	const [content, setContent] = useState(popupData.content);
+	const [name, setName] = useState(popupData.name || '');
+	const [category, setCategory] = useState(popupData.category || 'task');
+	const [content, setContent] = useState(popupData.content || '');
 
 
 	function hidePopup() {

@@ -2,8 +2,7 @@ import {
     CREATE_NOTE, 
     UPDATE_NOTE, 
     DELETE_NOTE, 
-    ARCHIVATE_NOTE, 
-    UNARCHIVATE_NOTE, 
+    TOGGLE_NOTE_ARCHIVING,
 } from "./types";
 
 function setDate() {
@@ -49,16 +48,10 @@ export function deleteNote(notesList, id) {
     }
 }
 
-export function archivateNote(note) {
+export function toggleNoteArchiving(note) {
+    const {isArchived} = note;
     return {
-        type: ARCHIVATE_NOTE,
-        payload: {...note, archived: true}
-    }
-}
-
-export function unarchivateNote(note) {
-    return {
-        type: UNARCHIVATE_NOTE,
-        payload: {...note, archived: false}
+        type: TOGGLE_NOTE_ARCHIVING,
+        payload: {...note, isArchived: !isArchived}
     }
 }
