@@ -3,6 +3,8 @@ import {
     UPDATE_NOTE, 
     DELETE_NOTE, 
     TOGGLE_NOTE_ARCHIVING,
+    DELETE_ALL_NOTES,
+    TOGGLE_ALL_NOTES_ARCHIVING,
 } from "./types";
 
 function setDate() {
@@ -53,5 +55,24 @@ export function toggleNoteArchiving(note) {
     return {
         type: TOGGLE_NOTE_ARCHIVING,
         payload: {...note, isArchived: !isArchived}
+    }
+}
+
+export function deleteAllNotes() {
+    return {
+        type: DELETE_ALL_NOTES,
+    }
+}
+
+export function toggleAllNotesArchiving(notesList, isListArchived) {
+    const editedList = Object.values(notesList).reduce((acc, note) => {
+        note.isArchived = !isListArchived;
+        acc[note.id] = note;
+        return acc
+    }, {})
+    console.log(editedList);
+    return {
+        type: TOGGLE_ALL_NOTES_ARCHIVING,
+        payload: editedList
     }
 }

@@ -3,7 +3,9 @@ import { actions as actionLogos } from "../../constants/logos";
 
 import {
     toggleNoteArchiving,
-    deleteNote
+    deleteNote,
+    toggleAllNotesArchiving,
+    deleteAllNotes
 } from "../../redux/actions/notesActions";
 
 import { togglePopup } from "../../redux/actions/generalsActions";
@@ -12,7 +14,7 @@ import { togglePopup } from "../../redux/actions/generalsActions";
 
 function NoteActionBtn({ type, id }) {
     const dispatch = useDispatch();
-    const { notes } = useSelector(state => state);
+    const { notes, generals: {isArchivedVisible} } = useSelector(state => state);
 
     const getAction = () => {
         switch(type) {
@@ -22,6 +24,10 @@ function NoteActionBtn({ type, id }) {
                 return toggleNoteArchiving(notes[id]);
             case 'delete':
                 return deleteNote(notes, id);
+            case 'deleteAll':
+                return deleteAllNotes();
+            case 'archivateAll':
+                return toggleAllNotesArchiving(notes, isArchivedVisible);
             default:
                 return () => null;
         }
