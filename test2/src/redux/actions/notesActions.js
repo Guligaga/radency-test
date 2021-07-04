@@ -70,7 +70,6 @@ export function toggleAllNotesArchiving(notesList, isListArchived) {
         acc[note.id] = note;
         return acc
     }, {})
-    console.log(editedList);
     return {
         type: TOGGLE_ALL_NOTES_ARCHIVING,
         payload: editedList

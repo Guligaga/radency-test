@@ -1,36 +1,22 @@
-import {CHANGE_ACTIVE_COUNT, CHANGE_ARCHIVED_COUNT} from './types';
+import { SET_TOTAL_SUMMARY } from "./types";
 
-export function changeActiveCount(count, num) {
-    return {
-        type: CHANGE_ACTIVE_COUNT,
-        payload: count + num,
+export function setTotalSummary(notesList) {
+  const summary = Object.values(notesList).reduce((acc, note) => {
+    const { category, isArchived } = note;
+    const type = isArchived ? "archived" : "active";
+    if (!acc[category]) {
+      acc[category] = {
+        category,
+        archived: 0,
+        active: 0,
+      };
     }
+    acc[category][type]++;
+    return acc;
+  }, {});
+
+  return {
+    type: SET_TOTAL_SUMMARY,
+    payload: summary,
+  };
 }
-
-export function changeArchivedCount(count, num) {
-    return {
-        type: CHANGE_ARCHIVED_COUNT,
-        payload: count + num,
-    }
-}
-
-export function setSummaryTotal(notesList, archivedList) {
-
-}
-
-// function setSummary(list, type) {
-//     Object.values(list).forEach(note => {
-//         const { category } = note;
-//         incSingleSummary(category, type);
-//     });
-// }
-
-// export function setSummaryTotal() {
-//     clearObject(summaryList);
-//     setSummary(notesList, 'active');
-//     setSummary(archivedList, 'archived');
-//     Object.keys(summaryList).forEach(key => {
-//         summaryList[key].category = key;
-//     });
-//     return summaryList;
-// }

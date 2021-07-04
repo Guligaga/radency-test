@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import React, { useMemo } from 'react';
 
 import './Table.scss';
 import TableRow from '../TableRow/TableRow'
@@ -6,25 +6,22 @@ import TableHeader from '../TableHeader/TableHeader';
 
 
 
-function Table({ name }) {
-    const { 
-        notes, 
-        summary, 
-        generals: {isArchivedVisible} 
-    } = useSelector(state => state);
 
-    const preset = {
-        'notes-list': {
-            list: Object.entries(notes).filter(([,note]) => note.isArchived === isArchivedVisible),
-            itemName: 'note',
-            actions: ['update', 'archivate', 'delete'],
-        },
-        'summary': {
-            list: Object.entries(summary),
-            itemName: 'category',
-            actions: [],
+function Table({ name, data, isArchivedVisible }) {
+    const preset = useMemo(() => (
+        {
+            'notes-list': {
+                list: Object.entries(data).filter(([,note]) => note.isArchived === isArchivedVisible),
+                itemName: 'note',
+                actions: ['update', 'archivate', 'delete'],
+            },
+            'summary': {
+                list: Object.entries(data),
+                itemName: 'category',
+                actions: [],
+            }
         }
-    }
+    ), [data, isArchivedVisible])
     
     const {list, itemName, actions} = preset[name];
 
@@ -41,4 +38,4 @@ function Table({ name }) {
     );
 }
 
-export default Table;
+export default React.memo(Table);
