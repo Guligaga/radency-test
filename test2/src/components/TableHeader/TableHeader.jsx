@@ -1,7 +1,5 @@
 import TableRow from '../TableRow/TableRow'
 
-// import { capitalCase } from "change-case";
-
 const HEADER_FIELDS = {
     'notes-list': {
         name: 'Name',
@@ -18,9 +16,6 @@ const HEADER_FIELDS = {
 }
 
 function TableHeader({parent}) {
-
-    
-    // console.log(headers);
     const actions = parent === 'notes-list' ? ['archivateAll', 'deleteAll'] : [];
     const type = parent === 'notes-list' ? 'header' : 'summary-header'
     return (

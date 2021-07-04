@@ -37,11 +37,9 @@ function Popup() {
 			} else {
 				dispatch(createNote(formDataObj));
 			}
-			
 			hidePopup()
 		}
 	}
-
 	
 	return (
 		<div className="popup" onClick={e => onWindowClickHandler(e)}>

@@ -9,7 +9,7 @@ import TableCell from '../TableCell/TableCell';
 const FIELDS_ORDER = ['icon', 'name', 'date', 'category', 'content', 'datesList', 'active', 'archived', 'actions'];
 
 function TableRow(props) {
-    const { data: entries, type, actions: actionsList, parent } = props;
+    const { data, type, actions, parent } = props;
 
     const setIcon = category => {
         const iconRef = categoryLogos[category];
@@ -26,18 +26,18 @@ function TableRow(props) {
     const presetActions = list => {
         if(list.length) {
             return list.map((action, i) => (
-                <NoteActionBtn key={i} type={action} id={entries.id}/>
+                <NoteActionBtn key={i} type={action} id={data.id}/>
             ))
         } 
         return null
     }
 
-    const data = {
-        ...entries,
-        icon: setIcon(entries.category),
-        category: presetCategoryName(entries.category),
-        datesList: presetDatesList(entries.datesList),
-        actions: presetActions(actionsList),
+    const dataToRender = {
+        ...data,
+        icon: setIcon(data.category),
+        category: presetCategoryName(data.category),
+        datesList: presetDatesList(data.datesList),
+        actions: presetActions(actions),
     }
 
     const fields = FIELDS_ORDER.filter(field => data.hasOwnProperty(field));
@@ -49,7 +49,7 @@ function TableRow(props) {
             <ul>
                 {fields.map(field => {
                     const classList = [baseClassName, `${baseClassName}_${paramCase(field)}`];
-                    return <TableCell key={field} classList={classList}>{data[field]}</TableCell>
+                    return <TableCell key={field} classList={classList}>{dataToRender[field]}</TableCell>
                 })}
             </ul>
         </li>

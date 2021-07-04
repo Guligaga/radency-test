@@ -1,6 +1,5 @@
 
-function TableCell(props) {
-    const {classList, children} = props;
+function TableCell({classList, children}) {
     return (
         <li className={classList.join(' ')}>{children}</li>
     );
