@@ -20,8 +20,18 @@ function deleteFromDB(id) {
   return DB[id] ? false : true;
 }
 
+function getById(id) {
+  return DB[id];
+}
+
+function getAll(id) {
+  return DB;
+}
+
 module.exports = {
   create,
   update,
   deleteFromDB,
+  getById,
+  getAll,
 };

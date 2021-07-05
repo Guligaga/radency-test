@@ -1,5 +1,11 @@
 const colors = require("colors");
-const { create, update, deleteFromDB } = require("../repositories/notesRepos");
+const {
+  create,
+  update,
+  deleteFromDB,
+  getById,
+  getAll,
+} = require("../repositories/notesRepos");
 const { getDate, getDatesList } = require("../helpers/date");
 const {
   noteSchema,
@@ -69,15 +75,33 @@ function deleteNote(req, res) {
     res.status(400).json(err);
   }
 }
+
 function getNote(req, res) {
-  res.json({ resp: "getNote" });
+  try {
+    const { id } = req.params;
+    const note = getById(id);
+
+    if (note) {
+      res.json(note);
+    } else {
+      res.status(404).send(`There is no such note with id: ${id}`);
+    }
+  } catch (err) {
+    console.log(err.name.red);
+    console.log(err.stack);
+    res.status(400).json(err);
+  }
 }
+
 function getAllNotes(req, res) {
-  res.json({ resp: "getAllNotes" });
+  const notesList = getAll();
+  res.json(notesList);
 }
+
 function noteArchivation(req, res) {
   res.json({ resp: "noteArchivation" });
 }
+
 function getStats(req, res) {
   res.json({ resp: "getStats" });
 }
