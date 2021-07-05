@@ -17,6 +17,6 @@ router.delete("/:id", deleteNote);
 router.get("/stats", getStats);
 router.get("/:id", getNote);
 router.get("/", getAllNotes);
-router.patch("/:id/archivation", noteArchivation);
+router.patch("/archivation/:id", noteArchivation);
 
 module.exports = router;

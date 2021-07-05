@@ -120,7 +120,21 @@ function noteArchivation(req, res) {
 }
 
 function getStats(req, res) {
-  res.json({ resp: "getStats" });
+  const notesList = getAll();
+  const stats = Object.values(notesList).reduce((acc, note) => {
+    const { category, isArchived } = note;
+    const type = isArchived ? "archived" : "active";
+    if (!acc[category]) {
+      acc[category] = {
+        category,
+        archived: 0,
+        active: 0,
+      };
+    }
+    acc[category][type]++;
+    return acc;
+  }, {});
+  res.json(stats);
 }
 
 module.exports = {
