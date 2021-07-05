@@ -1,7 +1,7 @@
 const colors = require("colors");
-const { create } = require("../repositories/notesRepos");
+const { create, update } = require("../repositories/notesRepos");
 const { getDate, getDatesList } = require("../helpers/date");
-const { noteSchema } = require("../helpers/validatiors");
+const { noteSchema, updateSchema } = require("../helpers/validatiors");
 
 function createNote(req, res) {
   try {
@@ -14,9 +14,9 @@ function createNote(req, res) {
       datesList: getDatesList(content),
       isArchived: false,
     };
-    const isCreated = create(data);
-    if (isCreated) {
-      res.json(isCreated);
+    const created = create(data);
+    if (created) {
+      res.json(created);
     } else {
       res.status(500).send("Something went wrong");
     }
@@ -26,8 +26,25 @@ function createNote(req, res) {
     res.status(400).json(err);
   }
 }
+
 function updateNote(req, res) {
-  res.json({ resp: "updateNote" });
+  try {
+    const { id } = req.params;
+    const validData = updateSchema.validateSync(req.body);
+    const { content } = validData;
+    const datesList = getDatesList(content);
+
+    const updated = update(id, { ...validData, datesList });
+    if (updated) {
+      res.json(updated);
+    } else {
+      res.status(500).send("Something went wrong");
+    }
+  } catch (err) {
+    console.log(err.name.red);
+    console.log(err.stack);
+    res.status(400).json(err);
+  }
 }
 function deleteNote(req, res) {
   res.json({ resp: "deleteNote" });

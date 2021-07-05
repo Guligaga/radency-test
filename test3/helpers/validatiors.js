@@ -6,4 +6,13 @@ const noteSchema = yup.object({
   content: yup.string().trim().required(),
 });
 
-module.exports = { noteSchema };
+const updateSchema = yup.object({
+  name: yup.string().trim(),
+  category: yup.string(),
+  content: yup.string().trim(),
+});
+
+module.exports = {
+  noteSchema,
+  updateSchema,
+};
