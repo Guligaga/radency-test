@@ -1,4 +1,5 @@
-import { createBtn, popup } from './vars';
+import { createBtn, popup } from '../constants';
+import { isObject } from '../utils/utils';
 
 function lockBody() {
     document.body.classList.toggle('locked');
@@ -10,7 +11,7 @@ export function toggleModal() {
 }
 
 export function setModal(fields = { name: '', category: 'task', content: '' }) {
-    if (typeof fields !== 'object') {
+    if (!isObject(fields)) {
         throw new Error('Argument type must be an object');
     }
     const fieldsContentTargets = {

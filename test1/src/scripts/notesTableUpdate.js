@@ -1,4 +1,11 @@
-import { notesList, notesTable, popupForm, popup, notesTypeSelector, archivedList } from './vars';
+import {
+    notesList,
+    notesTable,
+    popupForm,
+    popup,
+    notesTypeSelector,
+    archivedList,
+} from '../constants';
 import {
     createNote,
     updateNote,
@@ -18,7 +25,7 @@ import {
     createNoteLi,
     clearTableRender,
 } from './noteRender';
-import { incSingleSummary, decSingleSummary, setSummaryTotal } from './summary';
+import { increaseSingleSummary, decreaseSingleSummary, setSummaryTotal } from './summary';
 import { updateSummaryRender } from './summaryRender';
 
 let noteId = 0;
@@ -80,7 +87,7 @@ notesTable.addEventListener('click', e => {
     }
     noteId = e.target.closest('.note').dataset.id;
 
-    decSingleSummary(notesList[noteId].category, notesTypeSelector.value);
+    decreaseSingleSummary(notesList[noteId].category, notesTypeSelector.value);
     updateSummaryRender();
 
     deleteNote(noteId);
@@ -94,8 +101,8 @@ notesTable.addEventListener('click', e => {
     }
     noteId = e.target.closest('.note').dataset.id;
 
-    decSingleSummary(notesList[noteId].category, 'active');
-    incSingleSummary(notesList[noteId].category, 'archived');
+    decreaseSingleSummary(notesList[noteId].category, 'active');
+    increaseSingleSummary(notesList[noteId].category, 'archived');
     updateSummaryRender();
 
     archivateNote(noteId);
@@ -111,8 +118,8 @@ notesTable.addEventListener('click', e => {
 
     const currentNote = notesList[noteId] || archivedList[noteId];
 
-    decSingleSummary(currentNote.category, 'archived');
-    incSingleSummary(currentNote.category, 'active');
+    decreaseSingleSummary(currentNote.category, 'archived');
+    increaseSingleSummary(currentNote.category, 'active');
     updateSummaryRender();
 
     unarchivateNote(noteId);
@@ -175,13 +182,13 @@ popupForm.addEventListener('submit', e => {
             noteObj = createNote(formDataObj);
             addNoteRender(noteObj);
         } else {
-            decSingleSummary(notesList[noteId].category, 'active');
+            decreaseSingleSummary(notesList[noteId].category, 'active');
 
             noteObj = updateNote(formDataObj, noteId);
             updateNoteRender(noteObj, noteId);
         }
 
-        incSingleSummary(noteObj.category, 'active');
+        increaseSingleSummary(noteObj.category, 'active');
         updateSummaryRender();
 
         toggleModal(popup);

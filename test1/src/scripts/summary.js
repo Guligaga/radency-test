@@ -1,7 +1,7 @@
-import { clearObject } from './utils';
-import { summaryList, notesList, archivedList } from './vars';
+import { clearObject } from '../utils/utils';
+import { summaryList, notesList, archivedList } from '../constants';
 
-export function incSingleSummary(category, type) {
+export function increaseSingleSummary(category, type) {
     if (!Object.hasOwnProperty.call(summaryList, category)) {
         summaryList[category] = { [type]: 1, category };
     } else if (!Object.hasOwnProperty.call(summaryList[category], type)) {
@@ -12,7 +12,7 @@ export function incSingleSummary(category, type) {
     return summaryList;
 }
 
-export function decSingleSummary(category, type) {
+export function decreaseSingleSummary(category, type) {
     if (!Object.hasOwnProperty.call(summaryList, category)) {
         return new Error(`${category}: No such property in summaryList`);
     }
@@ -32,7 +32,7 @@ export function clearEmpty() {
 function setSummary(list, type) {
     Object.values(list).forEach(note => {
         const { category } = note;
-        incSingleSummary(category, type);
+        increaseSingleSummary(category, type);
     });
 }
 
