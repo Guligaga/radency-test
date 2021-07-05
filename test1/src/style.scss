@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@import './null.scss';
+@import './normalize.scss';
 
 $dark-grey: #7a7a7a;
 $light-grey: #e7eaf5;
@@ -235,9 +235,9 @@ body.locked {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .active {
-    display: block;
+    display: block !important;
 }

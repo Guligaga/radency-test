@@ -15,3 +15,16 @@ export function clearObject(obj) {
         delete obj[prop];
     });
 }
+
+export function isObject(obj) {
+    if (typeof obj !== 'object') {
+        return false;
+    }
+    if (!obj) {
+        return false;
+    }
+    if (Array.isArray(obj)) {
+        return false;
+    }
+    return true;
+}

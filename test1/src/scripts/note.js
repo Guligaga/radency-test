@@ -1,5 +1,5 @@
-import { notesList, archivedList, notesTypeSelector } from './vars';
-import { clearObject } from './utils';
+import { notesList, archivedList, notesTypeSelector } from '../constants';
+import { clearObject } from '../utils/utils';
 
 function setDate() {
     const options = {
@@ -17,7 +17,7 @@ function setDatesList(str) {
 
 export function createNote(data) {
     const { content } = data;
-    const id = +Object.keys(notesList).pop() + 1;
+    const id = Date.now();
     const date = setDate();
     const datesList = setDatesList(content);
     notesList[id] = { ...data, id, date, datesList };

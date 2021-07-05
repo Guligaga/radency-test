@@ -1,5 +1,5 @@
-import { presetCategoryName } from './utils';
-import { summaryList, summaryTable } from './vars';
+import { presetCategoryName } from '../utils/utils';
+import { summaryList, summaryTable } from '../constants';
 import { clearEmpty } from './summary';
 
 export function createSummaryHeader() {
