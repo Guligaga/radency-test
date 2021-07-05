@@ -6,6 +6,11 @@ const noteSchema = yup.object({
   content: yup.string().trim().required(),
 });
 
+const archivationSchema = yup.object({
+  isArchived: yup.boolean().required(),
+});
+
 module.exports = {
   noteSchema,
+  archivationSchema,
 };
