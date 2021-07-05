@@ -1,5 +1,5 @@
-import { presetCategoryName, presetDatesList } from './utils';
-import { notesTable, notesTypeSelector } from './vars';
+import { presetCategoryName, presetDatesList } from '../utils/utils';
+import { notesTable, notesTypeSelector } from '../constants';
 
 export function createNotesHeader(isActive) {
     const li = document.createElement('li');
